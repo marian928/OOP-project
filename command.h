@@ -49,27 +49,22 @@ public:
           }
           token += c;
           inParentheses = true;
-        } else if (c == ' ' || c == ',') {
+        } else if (c == ' ' || c == ',' || c == '=') {
           if(!token.empty()){
             this->noTokens++;
             token.clear();
           } 
         }else token += c;
       }
-      
-      cout << endl << this->noTokens << " ---> " << c << endl;
     }
     if (!token.empty()) {
         ++this->noTokens;
     }
-    
-      cout << endl << this->noTokens << endl;
   }
 
   void tokenize() {
     delete[] tokenizedInput;
     tokenCounter(this->input);
-    cout << endl << this->noTokens;
     if(this->noTokens == 0) {
       tokenizedInput = nullptr;
       return;
@@ -94,7 +89,7 @@ public:
           }
           token += c;
           inParentheses = true;
-        } else if (c == ' ' || c == ',') {
+        } else if (c == ' ' || c == ',' || c == '=') {
           if(!token.empty()){
             this->tokenizedInput[noToken] = token;
             noToken++;
@@ -109,6 +104,9 @@ public:
         this->tokenizedInput[noToken] = token;
         ++noToken;
       }
+  }
+  int getNoTokens() {
+    return this->noTokens;
   }
 
   void print() { 

@@ -30,7 +30,8 @@ int main() {
   // insert.printOutput();
 
   Command command(input);
-  DeleteFrom deleteColumn(command.getTokenizedInput(), 5);
+  command.print();
+  DeleteFrom deleteColumn(command.getTokenizedInput(), 6);
   deleteColumn.print();
 
   return 0;
