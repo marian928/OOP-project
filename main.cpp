@@ -6,7 +6,7 @@
 #include "command.h"
 #include "utils.h"
 #include "insertInto.h"
-
+#include "deleteFrom.h"
 
 using namespace std;
 
@@ -25,9 +25,13 @@ int main() {
   //   cout << endl << tokenizedParenthesis[i];
   // }
 
+  // Command command(input);
+  // InsertIntoCommand insert(command.getTokenizedInput(), 5);
+  // insert.printOutput();
+
   Command command(input);
-  InsertIntoCommand insert(command.getTokenizedInput(), 5);
-  insert.printOutput();
+  DeleteFrom deleteColumn(command.getTokenizedInput(), 5);
+  deleteColumn.print();
 
   return 0;
 };
