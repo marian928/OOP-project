@@ -7,6 +7,7 @@
 #include "utils.h"
 #include "insertInto.h"
 #include "deleteFrom.h"
+#include "select.h"
 
 using namespace std;
 
@@ -31,8 +32,10 @@ int main() {
 
   Command command(input);
   command.print();
-  DeleteFrom deleteColumn(command.getTokenizedInput(), command.getNoTokens());
-  deleteColumn.print();
+  // DeleteFrom deleteColumn(command.getTokenizedInput(), command.getNoTokens());
+  // deleteColumn.print();
+  Select select(command.getTokenizedInput(), command.getNoTokens());
+  select.print();
 
   return 0;
 };
