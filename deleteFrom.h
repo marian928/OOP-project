@@ -18,25 +18,11 @@ private:
 public:
   const static int TABLE_NAME_POZITION;
   const static int COLUMN_NAME_POZITION;
+  const static int COLUMN_VALUE_POZITION;
   DeleteFrom(string *commandTokens, int noTokens) {
     setTableName(commandTokens[DeleteFrom::TABLE_NAME_POZITION]);
-    if (checkInput(commandTokens[DeleteFrom::COLUMN_NAME_POZITION])) {
-      setColumnName(commandTokens[DeleteFrom::COLUMN_NAME_POZITION]);
-    } else {
-        string separatedValues[2];
-        string token = "";
-        for (int i = 0; i < commandTokens[DeleteFrom::COLUMN_NAME_POZITION].size(); i++) {
-            if (commandTokens[DeleteFrom::COLUMN_NAME_POZITION][i] == '=') {
-                separatedValues[0] = token;
-                token = "";
-            } else {
-                token += commandTokens[DeleteFrom::COLUMN_NAME_POZITION][i];
-            }
-        }
-        separatedValues[1] = token;
-        setColumnName(separatedValues[0]);
-        setColumnValue(separatedValues[1]);
-    }
+    setColumnName(commandTokens[DeleteFrom::COLUMN_NAME_POZITION]);
+    setColumnValue(commandTokens[DeleteFrom::COLUMN_VALUE_POZITION]);
   }
   void setTableName(string value) { this->tableName = value; }
   void setColumnName(string value) { this->columnName = value; }
@@ -62,5 +48,6 @@ public:
 
 const int DeleteFrom::TABLE_NAME_POZITION = 2;
 const int DeleteFrom::COLUMN_NAME_POZITION = 4;
+const int DeleteFrom::COLUMN_VALUE_POZITION = 5;
 
 #endif
