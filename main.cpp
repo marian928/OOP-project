@@ -31,7 +31,7 @@ int main() {
 
   Command command(input);
   command.print();
-  DeleteFrom deleteColumn(command.getTokenizedInput(), 6);
+  DeleteFrom deleteColumn(command.getTokenizedInput(), command.getNoTokens());
   deleteColumn.print();
 
   return 0;
