@@ -14,7 +14,7 @@ class DeleteFrom {
 private:
   string tableName = "";
   string columnName = "";
-    string columnValue = "";
+  string columnValue = "";
 public:
   const static int TABLE_NAME_POZITION;
   const static int COLUMN_NAME_POZITION;
@@ -24,8 +24,20 @@ public:
     setColumnName(commandTokens[DeleteFrom::COLUMN_NAME_POZITION]);
     setColumnValue(commandTokens[DeleteFrom::COLUMN_VALUE_POZITION]);
   }
-  void setTableName(string value) { this->tableName = value; }
-  void setColumnName(string value) { this->columnName = value; }
+
+  DeleteFrom(DeleteFrom& other) {
+    if(this == &other) return;
+    this->tableName = other.tableName;
+    this->columnName = other.columnName;
+    this->columnValue = other.columnValue;
+  }
+
+  void setTableName(string value) { 
+    this->tableName = value; 
+  }
+  void setColumnName(string value) { 
+    this->columnName = value; 
+  }
   void setColumnValue(string value) {
     this->columnValue = value;
   }
@@ -44,7 +56,22 @@ public:
     cout << endl << "Column: " << this->columnName;
     cout << endl << "Value to be Deleted: " << this->columnValue;
   }
+
+  bool operator==(DeleteFrom& other) {
+    if(this->tableName != other.tableName) return false;
+    if(this->columnName != other.columnName) return false;
+    if(this->columnValue != other.columnValue) return false;
+    return true;
+  }
+
+  friend void operator<<(ostream& console, DeleteFrom& deleteFrom);
 };
+
+void operator<<(ostream& console, DeleteFrom& deleteFrom) {
+    console << endl << "Table: " << deleteFrom.tableName;
+    console << endl << "Column: " << deleteFrom.columnName;
+    console << endl << "Value to be Deleted: " << deleteFrom.columnValue;
+  }
 
 const int DeleteFrom::TABLE_NAME_POZITION = 2;
 const int DeleteFrom::COLUMN_NAME_POZITION = 4;
