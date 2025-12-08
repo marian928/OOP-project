@@ -35,9 +35,10 @@ int main() {
   command.print();
   // DeleteFrom deleteColumn(command.getTokenizedInput(), command.getNoTokens());
   // // deleteColumn.print();
+  // cout << deleteColumn;
   // Select select(command.getTokenizedInput(), command.getNoTokens());
   // select.print();
-  Update update(command.getTokenizedInput(), command.getNoTokens());
-  update.print();
+  // Update update(command.getTokenizedInput(), command.getNoTokens());
+  // update.print();
   return 0;
 };
