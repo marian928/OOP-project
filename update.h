@@ -28,6 +28,15 @@ public:
         setCheckedValue(commandTokens[CHECKED_VALUE_POSITION]);
     }
 
+    Update(Update& other) {
+        if(this == &other) return;
+        this->tableName = other.tableName;
+        this->updatedColumn = other.updatedColumn;
+        this->newValue = other.newValue;
+        this->checkedColumn = other.checkedColumn;
+        this->checkedValue = other.checkedValue;
+    }
+
     void setTableName(string value) {
         this->tableName = value;
     }
@@ -55,7 +64,26 @@ public:
         cout << endl << "Checked Column: " << this->checkedColumn;
         cout << endl << "Checked Value: " << this->checkedValue;
     }
+
+    bool operator==(Update& update){
+        if(this->tableName != update.tableName) return false;
+        if(this->updatedColumn != update.updatedColumn) return false;
+        if(this->newValue != update.newValue) return false;
+        if(this->checkedColumn != update.checkedColumn) return false;
+        if(this->checkedValue != update.checkedValue) return false;
+        return true;
+    }
+
+    friend void operator<<(ostream& console, Update &u);
 };
+
+void operator<<(ostream& console, Update &u) {
+    console << endl << u.tableName;
+    console << endl << u.updatedColumn;
+    console << endl << u.newValue;
+    console << endl << u.checkedColumn;
+    console << endl << u.checkedValue;
+}
 
 const int Update::TABLE_NAME_POSITION = 1;
 const int Update::UPDATED_COLUMN_POSITION = 3;
