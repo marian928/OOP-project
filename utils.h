@@ -17,15 +17,21 @@ public:
   void tokenCounter(string value) {
     this->noValuesInParenthesis = 0;
     string token;
+    bool inDoubleParanthesis = false;
     for (int i = 1; i < value.size(); i++) {
       char c = value[i];
-      if (c == ' ' || c == ',' || c == ')') {
+      if(c == '(') 
+        inDoubleParanthesis = true;
+      if ((c == ' ' || c == ',' ||  c == ')') && inDoubleParanthesis == false ) {
         if (!token.empty()) {
           this->noValuesInParenthesis++;
           token.clear();
         }
-      } else
+      } else{
         token += c;
+        if(c == ')' ) 
+          inDoubleParanthesis  = false;
+      }
     }
     if (!token.empty()) {
       ++this->noValuesInParenthesis;
@@ -43,17 +49,22 @@ public:
     bool inParentheses = false;
     int noToken = 0;
     string token = "";
+    bool inDoubleParanthesis = false;
     for (int i = 1; i < value.size(); i++) {
       char c = value[i];
-
-      if (c == ' ' || c == ',' || c == ')') {
+      if(c == '(') 
+        inDoubleParanthesis = true;
+      if ((c == ' ' || c == ',' ||  c == ')') && inDoubleParanthesis == false) {
         if (!token.empty()) {
           this->tokenizedParenthesis[noToken] = token;
           noToken++;
           token.clear();
         }
-      } else
+      } else {
         token += c;
+        if(c == ')' ) 
+          inDoubleParanthesis  = false;
+      }
     }
 
     if (!token.empty()) {
