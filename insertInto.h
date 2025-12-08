@@ -69,6 +69,7 @@ public:
         }
     }
     
+
     InsertIntoCommand& operator=(const InsertIntoCommand& other) {
         if (this != &other) {
             delete[] values;
@@ -122,13 +123,35 @@ public:
         cout << endl << "Column " << i+1 << ": " << this->values[i];
     }
 
+
+
+    bool operator==(InsertIntoCommand& b) {
+        if(this->noValues != b.noValues) return false;
+        for(int i = 0; i < this->noValues; i++) {
+            if(this->values[i] != b.values[i]) return false;
+        }
+        return true;
+    }
+    
     ~InsertIntoCommand() {
         delete[] columnNames;
         delete[] values;
     }
+    
+    friend void operator <<(ostream& console, InsertIntoCommand& insert);
 };
+
+void operator <<(ostream& console, InsertIntoCommand& insert) {
+    console << endl << "Table: " << insert.tableName;
+    console << endl << "Columns: " << insert.noValues;
+    for (int i = 0; i < insert.noValues; i++)
+    console << endl << "Column " << i+1 << ": " << insert.values[i];
+}
+
+
 
 const int InsertIntoCommand::TABLE_NAME_POSITION = 2;
 const int InsertIntoCommand::VALUES_POSITION = 4;
+
 
 #endif 
