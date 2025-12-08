@@ -31,6 +31,21 @@ public:
         setColumnValue(commandTokens[COLUMN_VALUE_POSITION]);
     }
 
+    Select(Select& other) {
+        delete[] this->columnNames;
+        if(other.columnNames == nullptr) columnNames = nullptr;
+        else {
+            this->noColumns = other.noColumns;
+            columnNames = new string[this->noColumns];
+            for(int i = 0; i < this->noColumns; i++) {
+                this->columnNames[i] = other.columnNames[i];
+            }
+            this->tableName = other.tableName;
+            this->columnName = other.columnName;
+            this->columnValue = other.columnValue;
+        }
+    }
+
     void setColumnNames(string* values, int noValues) {
         delete[] columnNames;
         this->columnNames = new string[noValues];
@@ -63,7 +78,31 @@ public:
         cout << endl << "Column for extra selection: " << columnName;
         cout << endl << "Value: " << columnValue;
     }
+
+    bool operator==(Select& other) {
+        if(this->noColumns != other.noColumns) return false;
+        for(int i = 0; i < this->noColumns; i++) {
+            if(this->columnNames[i]!= other.columnNames[i]) return false;
+        }
+        if(this->tableName != other.tableName) return false;
+        if(this->columnName != other.columnName) return false;
+        if(this->columnValue != other.columnValue) return false;
+        return true;
+    }
+
+    friend void operator<<(ostream& console, Select& select);
+
 };
+
+void operator<<(ostream& console, Select& select) {
+    console << endl << "Selected Table: " << select.tableName;
+    console << endl << "Selected Columns: ";
+    for(int i = 0; i < select.noColumns; i++) {
+        console << select.columnNames[i] << " ";
+    }
+    console << endl << "Column for extra selection: " << select.columnName;
+    console << endl << "Value: " << select.columnValue;
+}
 
 const int Select::TABLE_NAME_POSITION = 3;
 const int Select::COLUMN_NAME_POSITION = 5;
