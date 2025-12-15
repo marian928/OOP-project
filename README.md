@@ -5,3 +5,6 @@ Phase 1 Progress:
 - CREATE INDEX command parsing
 - CREATE TABLE (in progress)
 - INSERT (in progress)
+
+
+phase 1
