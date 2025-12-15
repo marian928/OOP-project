@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/OOP-Project/x64/Debug
+/x64/Debug
+/OOP-Project.sln
+/OOP-Project.vcxproj
+/OOP-Project.vcxproj.filters
+/OOP-Project.vcxproj.user
